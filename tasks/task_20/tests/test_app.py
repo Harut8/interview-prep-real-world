@@ -1,7 +1,5 @@
 import pytest
-from app import (
-    NotificationService, Channel, Priority, DeliveryStatus,
-)
+from app import Channel, NotificationService, Priority
 
 
 @pytest.fixture
@@ -64,7 +62,10 @@ def test_send_stops_after_success(service):
     service.senders[Channel.PUSH] = CountingPushSender()
 
     notif_id = service.create_notification(
-        "user@test.com", "Test", "Hello", {},
+        "user@test.com",
+        "Test",
+        "Hello",
+        {},
         [Channel.EMAIL, Channel.PUSH],
     )
     service.send(notif_id)
